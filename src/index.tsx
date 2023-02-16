@@ -1,4 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
+import type { IPaymentParams } from './interfaces';
 
 const LINKING_ERROR =
   `The package 'paystack-react-native' doesn't seem to be linked. Make sure: \n\n` +
@@ -17,6 +18,9 @@ const PaystackReactNative = NativeModules.PaystackReactNative
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return PaystackReactNative.multiply(a, b);
+export function chargeCard(paymentParams: IPaymentParams): Promise<string> {
+  return PaystackReactNative.chargeCard(paymentParams);
+}
+export function init(publicKey: string): void {
+  return PaystackReactNative.initSdk(publicKey);
 }
